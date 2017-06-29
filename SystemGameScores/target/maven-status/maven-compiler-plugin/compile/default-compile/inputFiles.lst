@@ -1,0 +1,13 @@
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\DAO\GameDAO.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\DAO\ScoreDAO.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\controller\GameController.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\model\Person.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\controller\CORSInterceptor.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\DAO\DataBaseAccess.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\controller\PersonController.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\controller\ScoreController.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\model\Score.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\model\Game.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\controller\CORSController.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\DAO\PersonDAO.java
+D:\REPOSITORY\gameScoresAPI\SystemGameScores\src\main\java\br\edu\utfpr\gamescores\DAO\IBasicDAO.java
