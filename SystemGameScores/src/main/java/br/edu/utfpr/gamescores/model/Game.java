@@ -24,6 +24,10 @@ public class Game implements Serializable {
     private Person admin;
     private List<Person> players;
 
+    public Game() {
+    }
+
+    
     public Game(String name, String description, Person admin, List<Person> players) {
         this.name = name;
         this.description = description;

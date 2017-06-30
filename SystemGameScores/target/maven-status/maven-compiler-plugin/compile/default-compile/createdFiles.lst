@@ -1,8 +1,13 @@
-br\edu\utfpr\gamescores\DAO\DataBaseAccess.class
-br\edu\utfpr\gamescores\DAO\IBasicDAO.class
-br\edu\utfpr\gamescores\model\Score.class
+br\edu\utfpr\gamescores\controller\GameController.class
+br\edu\utfpr\gamescores\controller\PersonController.class
 br\edu\utfpr\gamescores\model\Game.class
 br\edu\utfpr\gamescores\model\Person.class
 br\edu\utfpr\gamescores\DAO\GameDAO.class
 br\edu\utfpr\gamescores\DAO\ScoreDAO.class
+br\edu\utfpr\gamescores\controller\CORSController.class
+br\edu\utfpr\gamescores\DAO\DataBaseAccess.class
+br\edu\utfpr\gamescores\DAO\IBasicDAO.class
+br\edu\utfpr\gamescores\model\Score.class
+br\edu\utfpr\gamescores\controller\CORSInterceptor.class
+br\edu\utfpr\gamescores\controller\ScoreController.class
 br\edu\utfpr\gamescores\DAO\PersonDAO.class
