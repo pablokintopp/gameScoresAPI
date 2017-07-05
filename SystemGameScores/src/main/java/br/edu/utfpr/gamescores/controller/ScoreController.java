@@ -14,7 +14,11 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
+import br.edu.utfpr.gamescores.DAO.GameDAO;
+import br.edu.utfpr.gamescores.DAO.PersonDAO;
 import br.edu.utfpr.gamescores.DAO.ScoreDAO;
+import br.edu.utfpr.gamescores.model.Game;
+import br.edu.utfpr.gamescores.model.Person;
 import br.edu.utfpr.gamescores.model.Score;
 import javax.inject.Inject;
 
@@ -28,6 +32,12 @@ public class ScoreController {
     
     @Inject
     private ScoreDAO scoreDAO;
+    
+    @Inject
+    private PersonDAO personDAO;
+    
+    @Inject
+    private GameDAO gameDAO;
     
     @Inject
     private Result result;
@@ -45,11 +55,19 @@ public class ScoreController {
     
     //@Logado
     @Consumes(value = "application/json")
-    @Post(value = {"","/"})
-    public void save(Score p){
-        
+    @Post(value = {"/{idGame}/{idPlayer}","/{idGame}/{idPlayer}/"})
+    public void save(Score p,String idGame, String idPlayer){
+        //System.out.println("Score POST: "+p.toString());
         try {
             scoreDAO.create(p);
+            Person player = personDAO.findById(idPlayer);
+            Game game = gameDAO.findById(idGame);
+            player.getScores().add(p);
+            personDAO.update(player);
+            if(!game.getPlayers().contains(player)){
+                game.getPlayers().add(player);
+                gameDAO.update(game);
+            }
             result.use(Results.json()).withoutRoot().from(p).serialize();
         } catch (Exception e) {
             e.printStackTrace();

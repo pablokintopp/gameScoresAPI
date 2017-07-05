@@ -6,6 +6,7 @@
 package br.edu.utfpr.gamescores.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.*;
@@ -15,14 +16,14 @@ import org.mongodb.morphia.annotations.*;
  * @author Pablo
  */
 
-@Entity(value = "person",noClassnameStored = true)
+@Entity(value = "person", noClassnameStored = true)
 public class Person  implements Serializable {
     @Id
     private ObjectId id;
     private String name;
     private String email;
     private String password;
-    private List<Score>scores;
+    private List<Score>scores = new ArrayList<>();
 
     public Person() {
     }
@@ -32,6 +33,12 @@ public class Person  implements Serializable {
         this.email = email;
         this.password = password;
         this.scores = scores;
+    }
+    
+    public Person(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;        
     }
 
     public ObjectId getId() {

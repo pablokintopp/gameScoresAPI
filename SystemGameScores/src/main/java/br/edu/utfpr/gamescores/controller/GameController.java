@@ -16,6 +16,10 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import br.edu.utfpr.gamescores.DAO.GameDAO;
 import br.edu.utfpr.gamescores.model.Game;
+import br.edu.utfpr.gamescores.model.Person;
+import br.edu.utfpr.gamescores.model.Score;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -40,6 +44,16 @@ public class GameController {
     @Get("{id}")
     public void get(String id){
         result.use(Results.json()).withoutRoot().from(gameDAO.findById(id)).serialize();
+    }
+    
+    @Get(value = {"{id}/scores","{id}/scores/"})
+    public void getScores(String id){
+        List<Person> players = gameDAO.findById(id).getPlayers();
+        ArrayList<Score> scores = new ArrayList<Score>();
+        for(Person p : players)
+            scores.addAll(p.getScores());
+        
+        result.use(Results.json()).withoutRoot().from(scores).serialize();
     }
     
     //@Logado

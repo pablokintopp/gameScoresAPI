@@ -6,6 +6,7 @@
 package br.edu.utfpr.gamescores.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.*;
@@ -22,7 +23,7 @@ public class Game implements Serializable {
     private String name;
     private String description;
     private Person admin;
-    private List<Person> players;
+    private List<Person> players = new ArrayList<>();
 
     public Game() {
     }

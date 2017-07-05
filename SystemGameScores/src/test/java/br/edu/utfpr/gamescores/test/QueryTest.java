@@ -20,35 +20,35 @@ import org.mongodb.morphia.query.Query;
  */
 
 public class QueryTest {
-    private static Morphia morphia;
-    private static MongoClient mongo;
-    private static Datastore datastore;
-    
-    @BeforeClass
-    public static void setupClass(){
-        morphia = new Morphia();
-        mongo = new MongoClient();
-        datastore = morphia.createDatastore(mongo,"gamescores");
-        
-        
-    }
-    @AfterClass
-    public static void tearDownClass(){
-    
-        mongo.close();
-        
-    }
-    @Test
-    public void findPessoas(){
-//        Query<Pessoa> query1 = datastore.find(Pessoa.class);
-//        System.out.println("[todas pessoas]"+query1.asList());
-        
-    }
-    
-     @Test
-    public void pessoasByQuery(){
-//        Query<Pessoa> query1 = datastore.createQuery(Pessoa.class).field("nome").contains("Jure");
-//        System.out.println("[Pessoas by query]"+query1.asList());
-        
-    }
+//    private static Morphia morphia;
+//    private static MongoClient mongo;
+//    private static Datastore datastore;
+//    
+//    @BeforeClass
+//    public static void setupClass(){
+//        morphia = new Morphia();
+//        mongo = new MongoClient();
+//        datastore = morphia.createDatastore(mongo,"gamescores");
+//        
+//        
+//    }
+//    @AfterClass
+//    public static void tearDownClass(){
+//    
+//        mongo.close();
+//        
+//    }
+//    @Test
+//    public void findPessoas(){
+////        Query<Pessoa> query1 = datastore.find(Pessoa.class);
+////        System.out.println("[todas pessoas]"+query1.asList());
+//        
+//    }
+//    
+//     @Test
+//    public void pessoasByQuery(){
+////        Query<Pessoa> query1 = datastore.createQuery(Pessoa.class).field("nome").contains("Jure");
+////        System.out.println("[Pessoas by query]"+query1.asList());
+//        
+//    }
 }

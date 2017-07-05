@@ -47,6 +47,11 @@ public class PersonController {
         result.use(Results.json()).withoutRoot().from(personDAO.findById(id)).serialize();
     }
     
+    @Get(value = { "{id}/scores","{id}/scores/" })
+    public void getScores(String id){
+        result.use(Results.json()).withoutRoot().from(personDAO.findById(id).getScores()).serialize();
+    }
+    
     //@Logado
     @Consumes(value = "application/json")
     @Post(value = {"","/"})
@@ -63,11 +68,21 @@ public class PersonController {
         
     }
     //@Logado
-    @Put
     @Consumes(value = "application/json")
-    public void update(Person g){
-        if(g.getId()!= null)
-            personDAO.update(g);
+    @Put(value = {"{id}","{id}/"})    
+    public void update(String id,Person g){
+        Person p = personDAO.findById(id);
+        
+        if(g.getEmail()!= null)
+            p.setEmail(g.getEmail());
+        
+        if(g.getName()!= null)
+            p.setName(g.getName());
+        
+        if(g.getPassword()!= null)
+            p.setPassword(g.getPassword());
+        
+        personDAO.update(p);
     }
     
     //@Logado
