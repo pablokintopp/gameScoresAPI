@@ -43,14 +43,26 @@ public class ScoreController {
     private Result result;
     
     @Get(value = {"","/"})
-    public void list(){    
-       result.use(Results.json()).withoutRoot().from(scoreDAO.findAll()).serialize();
+    public void list(){ 
+        try {
+            result.use(Results.json()).withoutRoot().from(scoreDAO.findAll()).serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+       
     }
     
     //@Logado
     @Get("{id}")
     public void get(String id){
-        result.use(Results.json()).withoutRoot().from(scoreDAO.findById(id)).serialize();
+        try {
+            result.use(Results.json()).withoutRoot().from(scoreDAO.findById(id)).serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+        
     }
     
     //@Logado
@@ -80,15 +92,27 @@ public class ScoreController {
     @Put
     @Consumes(value = "application/json")
     public void update(Score g){
-        if(g.getId()!= null)
+        try {
             scoreDAO.update(g);
+            result.use(Results.json()).withoutRoot().from(g).serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+            
     }
     
     //@Logado
     @Delete("{id}")
-    public void delete(String id){       
-        scoreDAO.remove(scoreDAO.findById(id));      
-        result.nothing();
+    public void delete(String id){ 
+        try {
+            scoreDAO.remove(scoreDAO.findById(id));      
+            result.nothing();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+        
         
     }
     

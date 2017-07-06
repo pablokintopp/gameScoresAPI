@@ -36,24 +36,43 @@ public class GameController {
     private Result result;
     
     @Get(value = {"","/"})
-    public void list(){    
-       result.use(Results.json()).withoutRoot().from(gameDAO.findAll()).serialize();
+    public void list(){
+        
+       try {
+            result.use(Results.json()).withoutRoot().from(gameDAO.findAll()).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+       
     }
     
     //@Logado
     @Get("{id}")
-    public void get(String id){
-        result.use(Results.json()).withoutRoot().from(gameDAO.findById(id)).serialize();
+    public void get(String id){        
+        
+        try {
+            result.use(Results.json()).withoutRoot().from(gameDAO.findById(id)).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
     }
     
     @Get(value = {"{id}/scores","{id}/scores/"})
     public void getScores(String id){
-        List<Person> players = gameDAO.findById(id).getPlayers();
-        ArrayList<Score> scores = new ArrayList<Score>();
-        for(Person p : players)
-            scores.addAll(p.getScores());
+        try {
+            List<Person> players = gameDAO.findById(id).getPlayers();
+            ArrayList<Score> scores = new ArrayList<Score>();
+            for(Person p : players)
+                scores.addAll(p.getScores());
+            result.use(Results.json()).withoutRoot().from(scores).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
         
-        result.use(Results.json()).withoutRoot().from(scores).serialize();
+        
     }
     
     //@Logado
@@ -63,7 +82,7 @@ public class GameController {
         
         try {
             gameDAO.create(g);
-            result.use(Results.json()).withoutRoot().from(g).serialize();
+            result.use(Results.json()).withoutRoot().from(g).recursive().serialize();
         } catch (Exception e) {
             e.printStackTrace();
             result.notFound();
@@ -75,15 +94,30 @@ public class GameController {
     @Put
     @Consumes(value = "application/json")
     public void update(Game g){
-        if(g.getId()!= null)
+        try {
             gameDAO.update(g);
+            result.use(Results.json()).withoutRoot().from(g).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+            
     }
     
     //@Logado
     @Delete("{id}")
-    public void delete(String id){       
-        gameDAO.remove(gameDAO.findById(id));      
-        result.nothing();
+    public void delete(String id){  
+        
+        try {
+            gameDAO.remove(gameDAO.findById(id));  
+            result.nothing();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+         
+            
+        
         
     }
     

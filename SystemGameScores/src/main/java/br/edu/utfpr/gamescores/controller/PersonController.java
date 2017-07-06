@@ -37,19 +37,37 @@ public class PersonController {
     private Result result;
     
     @Get(value = {"","/"})
-    public void list(){    
-       result.use(Results.json()).withoutRoot().from(personDAO.findAll()).serialize();
+    public void list(){ 
+        try {
+            result.use(Results.json()).withoutRoot().from(personDAO.findAll()).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+       
     }
     
     //@Logado
     @Get("{id}")
     public void get(String id){
-        result.use(Results.json()).withoutRoot().from(personDAO.findById(id)).serialize();
+        try {
+            result.use(Results.json()).withoutRoot().from(personDAO.findById(id)).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+        
     }
     
     @Get(value = { "{id}/scores","{id}/scores/" })
     public void getScores(String id){
-        result.use(Results.json()).withoutRoot().from(personDAO.findById(id).getScores()).serialize();
+        try {
+            result.use(Results.json()).withoutRoot().from(personDAO.findById(id).getScores()).recursive().serialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+        
     }
     
     //@Logado
@@ -59,7 +77,7 @@ public class PersonController {
         
         try {
             personDAO.create(p);
-            result.use(Results.json()).withoutRoot().from(p).serialize();
+            result.use(Results.json()).withoutRoot().from(p).recursive().serialize();
         } catch (Exception e) {
             e.printStackTrace();
             result.notFound();
@@ -69,27 +87,34 @@ public class PersonController {
     }
     //@Logado
     @Consumes(value = "application/json")
-    @Put(value = {"{id}","{id}/"})    
-    public void update(String id,Person g){
-        Person p = personDAO.findById(id);
+    @Put(value = {"","/"})    
+    public void update(Person p){
+        try {
+            personDAO.update(p);
+            result.use(Results.json()).withoutRoot().from(p).recursive().serialize();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+       
         
-        if(g.getEmail()!= null)
-            p.setEmail(g.getEmail());
+       
         
-        if(g.getName()!= null)
-            p.setName(g.getName());
         
-        if(g.getPassword()!= null)
-            p.setPassword(g.getPassword());
-        
-        personDAO.update(p);
     }
     
     //@Logado
     @Delete("{id}")
-    public void delete(String id){       
-        personDAO.remove(personDAO.findById(id));      
-        result.nothing();
+    public void delete(String id){ 
+        try {
+            personDAO.remove(personDAO.findById(id));      
+            result.nothing();            
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.notFound();
+        }
+        
         
     }
 }
